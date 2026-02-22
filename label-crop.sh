@@ -26,7 +26,7 @@ IE_BBOX=(500 130 820 570)
 show_help() {
 cat <<'EOF'
 Usage:
-crop-label.sh [--type fr|ie] [input.pdf] [output.pdf]
+label-crop.sh [--type fr|ie] [input.pdf] [output.pdf]
 
 Behaviour:
 --type      Label type (fr or ie). Default: ie
