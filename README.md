@@ -7,7 +7,7 @@ A small Bash script that crops Vinted shipping-label PDFs to the exact label are
 - Takes a full-page PDF (e.g. A4) that contains a Vinted shipping label.
 - Crops it to a fixed rectangle (bounding box) in PDF coordinates, so the output is just the label region.
 - Uses **pdfcrop** with an explicit `--bbox` (no auto-detection); coordinates are in PDF points: `llx lly urx ury`, with the origin at the **bottom-left** of the page.
-- Supports multiple label **types** (e.g. FR, IE), each with its own bounding box, because layout differs by country/source.
+- Supports multiple label **types** (e.g. FR, IE, Faerly), each with its own bounding box, because layout differs by country/source.
 
 Output is written to a new PDF (by default `*_cropped.pdf`).
 
@@ -34,12 +34,12 @@ mpm --install=pdfcrop
 ## Usage
 
 ```bash
-./label-crop.sh [--type fr|ie] [input.pdf] [output.pdf]
+./label-crop.sh [--type fr|ie|faerly] [input.pdf] [output.pdf]
 ```
 
 | Argument     | Description |
 |-------------|-------------|
-| `--type`    | Label type: `fr` or `ie`. Default: `ie`. |
+| `--type`    | Label type: `fr`, `ie` or `faerly` (Faerly DPD Home Collection return label, cropped to the "cut or fold here" dotted line). Default: `ie`. |
 | `input.pdf` | Input PDF. If omitted, the first `*.pdf` in the current directory is used. |
 | `output.pdf`| Output PDF. If omitted, the name is `{input_base}_cropped.pdf`. |
 
@@ -54,6 +54,9 @@ Examples:
 
 ./label-crop.sh --type ie in.pdf out.pdf
 # Explicit input and output
+
+./label-crop.sh --type faerly Faerly-DPD-Home-Collection-Return-Label.pdf
+# → Faerly-DPD-Home-Collection-Return-Label_cropped.pdf
 ```
 
 ## Adding more label types

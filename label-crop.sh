@@ -19,6 +19,10 @@ FR_BBOX=(0 0 595 482)
 # Crop rectangle for IE label
 IE_BBOX=(500 130 820 570)
 
+# Crop rectangle for Faerly DPD Home Collection return label (A4 portrait).
+# Bottom edge is the "cut or fold here" dotted line, just above its caption.
+FAERLY_BBOX=(0 426 596 843)
+
 ###############################################################################
 # Script
 ###############################################################################
@@ -26,10 +30,10 @@ IE_BBOX=(500 130 820 570)
 show_help() {
 cat <<'EOF'
 Usage:
-label-crop.sh [--type fr|ie] [input.pdf] [output.pdf]
+label-crop.sh [--type fr|ie|faerly] [input.pdf] [output.pdf]
 
 Behaviour:
---type      Label type (fr or ie). Default: ie
+--type      Label type (fr, ie or faerly). Default: ie
 input.pdf   Input PDF. If omitted, first *.pdf in current dir is used
 output.pdf  Output PDF. If omitted, _cropped.pdf is appended to input name
 --help      Show this help
@@ -83,8 +87,11 @@ case "$TYPE" in
   ie)
     BBOX=("${IE_BBOX[@]}")
     ;;
+  faerly)
+    BBOX=("${FAERLY_BBOX[@]}")
+    ;;
   *)
-    echo "Invalid type: $TYPE (expected fr or ie)"
+    echo "Invalid type: $TYPE (expected fr, ie or faerly)"
     exit 1
     ;;
 esac
